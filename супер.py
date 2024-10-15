@@ -1,28 +1,35 @@
 class Horse:
-    x_distance = 0
-    sound = 'Frrr'
+    def __init__(self):
+        self.x_distance = 0
+        self.sound = 'Frrr'
+        super().__init__()
 
-    def run(self, dx):  # dx изменение дистанции
+    def run(self, dx):
         self.x_distance += dx
 
 
 class Eagle:
-    y_distance = 0
-    sound = 'I train, eat, sleep, and repeat'
+
+    def __init__(self):
+        self.y_distance = 0
+        self.sound = 'I train, eat, sleep and repeat'
 
     def fly(self, dy):
         self.y_distance += dy
 
 
 class Pegasus(Horse, Eagle):
+    def __init__(self):
+        super().__init__()
+
     def move(self, dx, dy):
         super().run(dx)
         super().fly(dy)
 
     def get_pos(self):
-        return (self.x_distance, self.y_distance)
+        return self.x_distance, self.y_distance
 
-    def voice(self):
+    def voice(self):  
         print(self.sound)
 
 
@@ -34,11 +41,5 @@ print(p1.get_pos())
 p1.move(-5, 20)
 print(p1.get_pos())
 
-p1.voice() #Frrr
-
-#Заметьте, что Pegasus издаёт звук
-# "I train, eat, sleep, and repeat",
-# т.к. по порядку сначала идёт наследование
-# от Horse, а после от Eagle.
-
+p1.voice()
 print(Pegasus.mro())
